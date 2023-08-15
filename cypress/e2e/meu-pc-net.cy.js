@@ -1,4 +1,5 @@
 describe('Testando Meu PC.net', () => {
+
   it('Validando cadastro', () => {
 
     //Esperando 1 segundo para executar as funções abaixo
@@ -40,4 +41,39 @@ describe('Testando Meu PC.net', () => {
     //Verificando se chegamos na tela final do cadastro
     cy.contains('Escolha seu nome de usuário').should('be.visible')
   })
+
+  it.only('Validando login', () => {
+
+//Esperando 1 segundo para executar as funções abaixo
+cy.visit('https://meupc.net')
+
+//Clicando no botão de menu pela classe '.navbar-burger'
+cy.wait(1000)
+
+cy.get('.navbar-burger').click()
+
+cy.wait(1000)
+
+//Clicando no botão de cadastro
+cy
+
+.get('ul.menu-list') //Pegando a ul com a classe ul.menu-list
+
+.children('li') //Pegando os filhos da ul
+
+.children('a[href="https://meupc.net/login"]') //Pegando o filho da li que tem o href com o valor 'https://meupc.net'
+
+.click()
+
+//Preenchendo o campo e-mail do cadastro com o valor bruno@exemple.com
+cy.contains('Email ou nome de usuário').siblings('input').type('testecypress@tuamaeaquelaursa')
+
+//Preenchendo o campo senha do cadastro com o valor 12345678
+cy.contains('Senha').siblings('span').children('input').type('testecypress')
+
+//Clicando no Entrar 
+cy.contains('Cancelar').siblings('button').click()
+
+  })
+
 })
